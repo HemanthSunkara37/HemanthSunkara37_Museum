@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #eee;
+            padding: 10px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item {
+            margin: 10px;
+            flex: 1 1 calc(33.33% - 20px);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Museum Website</h1>
+    </header>
+    <nav>
+        <button onclick="filterGallery('all')">Show All</button>
+        <button onclick="filterGallery('paintings')">Paintings</button>
+        <button onclick="filterGallery('sculptures')">Sculptures</button>
+        <input type="text" id="searchInput" placeholder="Search...">
+    </nav>
+    <main>
+        <section>
+            <h2>Featured Exhibit</h2>
+            <p>This is a description of the featured exhibit.</p>
+            <video width="400" controls>
+                <source src="example.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        <section>
+            <h2>Art Gallery</h2>
+            <div class="gallery" id="gallery">
+                <!-- Gallery items will be dynamically loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Dummy data for the gallery
+        const galleryData = [
+            { type: 'paintings', image: 'painting1.jpg' },
+            { type: 'sculptures', image: 'sculpture1.jpg' },
+            // Add more items as needed
+        ];
+
+        // Function to filter the gallery based on category
+        function filterGallery(category) {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+
+            const filteredData = category === 'all' ? galleryData : galleryData.filter(item => item.type === category);
+
+            filteredData.forEach(item => {
+                const galleryItem = document.createElement('div');
+                galleryItem.classList.add('gallery-item');
+
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.type;
+
+                galleryItem.appendChild(img);
+                gallery.appendChild(galleryItem);
+            });
+        }
+    </script>
+</body>
+</html>
